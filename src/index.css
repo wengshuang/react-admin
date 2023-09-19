@@ -1,0 +1,20 @@
+body,
+html,
+#root {
+  height: 100%;
+}
+p,div,h1,h2,h3,h4,h5,h6,body,
+html,
+#root,li,ul,ol,button,span,a {
+  margin: 0;
+  padding: 0;
+}
+#root {
+  display: flex;
+  width: 100%;
+}
+
+.graph {
+  flex: 1;
+  height: 100%;
+}
