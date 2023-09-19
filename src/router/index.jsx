@@ -1,6 +1,6 @@
-import { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
-
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Loading from "./loading.jsx";
 import MyIcon from "@/components/icon.jsx";
 
 import Layout from "@/layout/index.jsx";
@@ -34,22 +34,26 @@ export const menusRouters = [
 export const menusRoutersChildren = menusRouters
   .map((item) => item.children)
   .flat();
-const routers = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <Layout />,
-      errorElement: <ErrorPage />,
-      children: menusRoutersChildren,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-  ],
-  {
-    basename: "/react-admin",
-  }
-);
-
+const suspense = (ele) => {
+  return <Suspense fallback={<Loading />}>{ele}</Suspense>;
+};
+const routers = () => {
+  return (
+    <BrowserRouter basename="/react-admin">
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {menusRoutersChildren.map((item) => (
+            <Route
+              key={item.path}
+              path={item.path}
+              element={suspense(item.element)}
+            />
+          ))}
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 export default routers;
