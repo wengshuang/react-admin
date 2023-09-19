@@ -16,14 +16,9 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    monacoEditorPlugin.default({
-      languageWorkers: ["typescript", "editorWorkerService"],
-      customWorkers: [
-        {
-          label: "graphql",
-          entry: "monaco-graphql/dist/graphql.worker",
-        },
-      ],
+    monacoEditorPlugin({
+      languages: ["javascript"], // configure your languages here
+      features: ["coreCommands", "find"],
     }),
   ],
   css: {
