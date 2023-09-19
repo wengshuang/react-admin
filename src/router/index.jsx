@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import Loading from "./loading.jsx";
 import MyIcon from "@/components/icon.jsx";
 
@@ -37,9 +37,10 @@ export const menusRoutersChildren = menusRouters
 const suspense = (ele) => {
   return <Suspense fallback={<Loading />}>{ele}</Suspense>;
 };
+
 const routers = () => {
   return (
-    <BrowserRouter basename="/react-admin">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           {menusRoutersChildren.map((item) => (
@@ -53,7 +54,7 @@ const routers = () => {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 export default routers;
