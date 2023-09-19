@@ -7,7 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   const onFinish = () => {
     localStorage.token = "123";
-    navigate("/home");
+    navigate("/monaco-editor");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
