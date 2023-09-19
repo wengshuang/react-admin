@@ -34,17 +34,22 @@ export const menusRouters = [
 export const menusRoutersChildren = menusRouters
   .map((item) => item.children)
   .flat();
-const routers = createBrowserRouter([
+const routers = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: menusRoutersChildren,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+  ],
   {
-    path: "/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: menusRoutersChildren,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-]);
+    basename: "/react-admin",
+  }
+);
 
 export default routers;
