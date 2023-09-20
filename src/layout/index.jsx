@@ -1,11 +1,11 @@
 import { Layout } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import Menus from "./components/Menus.jsx";
 import MyHeader from "./components/Header.jsx";
 const { Header, Sider, Content } = Layout;
 
-const MyLayout = () => {
+const MyLayout = memo(function MyLayout() {
   const [collapsed, setCollapsed] = useState(false);
 
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ const MyLayout = () => {
       </Header>
       <Layout hasSider>
         <Sider
+          breakpoint="lg"
           theme="light"
           collapsible
           collapsed={collapsed}
@@ -40,6 +41,6 @@ const MyLayout = () => {
       </Layout>
     </Layout>
   );
-};
+});
 
 export default MyLayout;
